@@ -61,6 +61,7 @@ public class JwtSpringPfeApplication implements CommandLineRunner {
 	taskRepository.findAll().forEach(t->{
 		System.out.println(t.getTaskName());
 	});
+	
 	}
 	
 	
