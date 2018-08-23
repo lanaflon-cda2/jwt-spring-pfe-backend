@@ -3,9 +3,11 @@ package org.isi;
 import java.util.stream.Stream;
 
 import org.isi.dao.TaskRepository;
+import org.isi.dao.VlanRepository;
 import org.isi.entities.AppRole;
 import org.isi.entities.AppUser;
 import org.isi.entities.Task;
+import org.isi.entities.Vlan;
 import org.isi.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -20,6 +22,8 @@ public class JwtSpringPfeApplication implements CommandLineRunner {
 	@Autowired
 	
 	private TaskRepository taskRepository ;
+	@Autowired
+	private  VlanRepository repository;
 	@Autowired
 	private AccountService accountService ;
 
@@ -62,6 +66,12 @@ public class JwtSpringPfeApplication implements CommandLineRunner {
 		System.out.println(t.getTaskName());
 	});
 	
+	
+		
+		
+	repository.save(new Vlan(1,"vlan default","yaro"));
+
+
 	}
 	
 	

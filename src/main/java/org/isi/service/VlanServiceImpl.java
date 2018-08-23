@@ -2,10 +2,12 @@ package org.isi.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicLong;
 
 import org.isi.dao.VlanRepository;
 import org.isi.entities.Vlan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 @Service
@@ -14,11 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 public class VlanServiceImpl implements VlanService {
 	 @Autowired
 	    private VlanRepository repository;
+	 private static final AtomicLong counter = new AtomicLong();
+	 private static List<Vlan> vlans;
 
 	    @Override
 	    public Vlan create(Vlan vlan) {
 	return repository.save(vlan);
-	 
+	
+
+	
 	
 
 }
@@ -27,7 +33,7 @@ public class VlanServiceImpl implements VlanService {
 	        return repository.findAll();
 	}
 		
-	    @Override
+	    /*@Override
 	    public Vlan delete(int id) {
 	        Vlan vlan = repository.findById(id);
 	        if(vlan != null){
@@ -35,12 +41,38 @@ public class VlanServiceImpl implements VlanService {
 	        }
 	        return vlan;
 	}
-	 
+	 */
 	    @Override
-	    public Vlan update(Vlan vlan) {
-	        return repository.save(vlan);
+	    public void update(int id ,Vlan vlandetails) {
+	    	
+	    	Vlan vlan = repository.findById(id);
+	    	
+	    	vlan.setName(vlandetails.getName());
+	    	vlan.setVlan_type(vlandetails.getVlan_type());
+	    	 
+	    	
+	    	repository.save(vlan);
+	    	
+	    
 	}
+		@Override
+		public void  delete(int id) {
+			Vlan vlan = repository.findById(id);
+			repository.delete(vlan);
+			
+		
+		}
 	
+		@Override
+		public void  deleteAll() {
+			
+			repository.deleteAll();
+			
+		
+		}
 	
+	   
+	    
+	   
 	    
 }

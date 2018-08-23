@@ -7,8 +7,8 @@ import javax.persistence.Id;
 @Entity 
 
 public class Vlan {
-	@Id @GeneratedValue
-private Integer id ;
+@Id @GeneratedValue
+private int id ;
 private String name ;
 private String vlan_type  ;
 public Vlan() {
@@ -39,7 +39,6 @@ public String getVlan_type() {
 public void setVlan_type(String vlan_type) {
 	this.vlan_type = vlan_type;
 }
-
 
 
 

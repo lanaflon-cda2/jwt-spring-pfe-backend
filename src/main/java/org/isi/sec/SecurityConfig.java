@@ -40,6 +40,10 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		 
 		 http.authorizeRequests().antMatchers("/login/**","/register/**").permitAll();
 		 http.authorizeRequests().antMatchers(HttpMethod.POST,"/tasks/**").hasAnyAuthority("ADMIN");
+		 http.authorizeRequests().antMatchers(HttpMethod.POST,"/vlan/**").permitAll();
+		 http.authorizeRequests().antMatchers(HttpMethod.GET,"/vlan/**").permitAll();
+		 http.authorizeRequests().antMatchers(HttpMethod.PUT,"/vlan/**").permitAll();
+		 http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/vlan/**").permitAll();
 		 http.authorizeRequests().anyRequest().authenticated();
 		 http.addFilter(new JWTAuthenticationFilter(authenticationManager()));
 		 http.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
