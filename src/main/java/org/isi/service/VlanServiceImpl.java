@@ -43,18 +43,25 @@ public class VlanServiceImpl implements VlanService {
 	}
 	 */
 	    @Override
-	    public void update(int id ,Vlan vlandetails) {
+	    public Vlan update(Vlan vlan) {
 	    	
-	    	Vlan vlan = repository.findById(id);
 	    	
-	    	vlan.setName(vlandetails.getName());
-	    	vlan.setVlan_type(vlandetails.getVlan_type());
+	    	
+	    	
 	    	 
 	    	
-	    	repository.save(vlan);
+	    	return repository.save(vlan);
 	    	
 	    
 	}
+	    @Override
+	    public  Vlan findone(int id) {
+	    	Vlan vlan = repository.findById(id);
+	    	
+	    	return vlan;
+	    }
+	    
+	    
 		@Override
 		public void  delete(int id) {
 			Vlan vlan = repository.findById(id);

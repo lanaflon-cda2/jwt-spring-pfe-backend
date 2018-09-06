@@ -1,5 +1,6 @@
 package org.isi.web;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -8,6 +9,7 @@ import org.isi.entities.Task;
 import org.isi.entities.Vlan;
 import org.isi.service.VlanService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,32 +28,60 @@ public class VlanRestController {
 	
 	//affichage de tout les vlan
 	@GetMapping("/vlan")
-	public List<Vlan> listVlans(){
-		return vlanservice.findAll();
+	public ResponseEntity<List<Vlan>> listVlans(){
+		
+		
+	List<Vlan>  vlans = vlanservice.findAll();
+	return new ResponseEntity<List<Vlan>> (vlans,HttpStatus.OK);
+	
 		
 	}
 	//creation de vlan
 	@PostMapping("/vlan")
-	public Vlan save(@RequestBody Vlan vlan) {
-		//return  taskRepository.save(t);
-		return vlanservice.create(vlan);
+	public ResponseEntity<Vlan>  save(@RequestBody Vlan vlan) {
+		
+		if (vlan==null)
+		{throw new NullPointerException("vlan object cannot be null"); }	
+		vlan.setCreateddate(new Date());
+		 Vlan dbvlan = vlanservice.create(vlan);
+		 return new ResponseEntity<Vlan>(dbvlan ,HttpStatus.OK) ;
+		 
 		
 	}
-	//mise à jour vlan
-
-	@PutMapping("/vlan/{id}")
-	public void update(@PathVariable(value="id")int id , @Valid @RequestBody Vlan vlan ) {
-		//return  taskRepository.save(t);
-	 vlanservice.update(id, vlan);
+	//afficher une vlan 
+	@GetMapping("/vlan/{id}")
+	public ResponseEntity<Vlan> findVlan(@PathVariable(value="id")int id){
+		
+		
+		
+		 Vlan dbvlan =vlanservice.findone(id);
+		 return new ResponseEntity<Vlan>(dbvlan ,HttpStatus.OK) ;
+		
+	}
 	
+	
+
+	
+
+	@PostMapping("/updatevlan")
+	public ResponseEntity<Vlan> update(@Valid @RequestBody Vlan vlan ) {
+		String name=null;
+		String vlan_type=null;
+		//return  taskRepository.save(t);
+		vlan.setUpdateddate(new Date());
+		
+		Vlan dbvlan =  vlanservice.update(vlan);
+	
+		 return new ResponseEntity<Vlan>(dbvlan ,HttpStatus.OK) ;
 	}
 	
 	//supression Vlan 
-	
+	 
 
 	@DeleteMapping("/vlan/{id}")
 	public void delete(@PathVariable(value="id")int id  ) {
-		//return  taskRepository.save(t);
+		
+		
 	 vlanservice.delete(id);
 	
 	}

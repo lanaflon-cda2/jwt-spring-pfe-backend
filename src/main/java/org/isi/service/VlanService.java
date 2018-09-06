@@ -13,13 +13,13 @@ public interface VlanService {
     Vlan create(Vlan vlan);
     List<Vlan> findAll();
     void  delete(int id);
-    void update(int id ,Vlan vlan);
+    Vlan update(Vlan vlan);
     void deleteAll();
   /*  public boolean isVlanExist(Vlan vlan);
     Vlan findByName(String name);*/
   /* Vlan findById(long id)*/
-   /* Vlan findOne(int id);
-*/
+   Vlan findone(int id);
+
  /* Vlan delete(int id);
  */
   /* 

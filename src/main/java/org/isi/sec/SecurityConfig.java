@@ -29,21 +29,27 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 	auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncode );
 	
 	}
+	
+	
+	
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		
 		 http.csrf().disable();
+		 
 		 http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 		 //http.formLogin();
 		 
 		 http.authorizeRequests().antMatchers("/login/**","/register/**").permitAll();
 		 http.authorizeRequests().antMatchers(HttpMethod.POST,"/tasks/**").hasAnyAuthority("ADMIN");
 		 http.authorizeRequests().antMatchers(HttpMethod.POST,"/vlan/**").permitAll();
+		 http.authorizeRequests().antMatchers(HttpMethod.POST,"/updatevlan/**").permitAll();
 		 http.authorizeRequests().antMatchers(HttpMethod.GET,"/vlan/**").permitAll();
 		 http.authorizeRequests().antMatchers(HttpMethod.PUT,"/vlan/**").permitAll();
-		 http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/vlan/**").permitAll();
+		 http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/vlan/**").hasAnyAuthority("ADMIN");
+
 		 http.authorizeRequests().anyRequest().authenticated();
 		 http.addFilter(new JWTAuthenticationFilter(authenticationManager()));
 		 http.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

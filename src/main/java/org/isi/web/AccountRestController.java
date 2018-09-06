@@ -28,6 +28,7 @@ public class AccountRestController {
 		
 		
 		
+		
 		 accountService.saveUser(appUser);
 		 accountService.addRoleToUser(userForm.getUsername(),"USER");
 		

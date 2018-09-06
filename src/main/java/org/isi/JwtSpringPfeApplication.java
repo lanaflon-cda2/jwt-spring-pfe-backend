@@ -69,7 +69,7 @@ public class JwtSpringPfeApplication implements CommandLineRunner {
 	
 		
 		
-	repository.save(new Vlan(1,"vlan default","yaro"));
+	/*repository.save(new Vlan(1,"vlan default","yaro"));*/
 
 
 	}
