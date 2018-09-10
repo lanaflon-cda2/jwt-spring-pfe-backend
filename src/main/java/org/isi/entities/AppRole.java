@@ -3,7 +3,10 @@ package org.isi.entities;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 @Entity
+@JsonDeserialize
 public class AppRole {
 	@Id @GeneratedValue
 	private Long id ;

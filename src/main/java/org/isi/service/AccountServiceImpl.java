@@ -1,9 +1,12 @@
 package org.isi.service;
 
+import java.util.List;
+
 import org.isi.dao.RoleRepository;
 import org.isi.dao.UserRepository;
 import org.isi.entities.AppRole;
 import org.isi.entities.AppUser;
+import org.isi.entities.Vlan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -49,5 +52,20 @@ public class AccountServiceImpl implements  AccountService {
 		
 		return userRepository.findByUsername(username) ;
 	}
-
+	
+	@Override
+	public List<AppUser> findAll(){
+		return userRepository.findAll();
+		
+		
+	}
+	@Override
+	public AppUser findone(String username) {
+		return userRepository.findByUsername(username);
+		
+	}
+    @Override
+    public AppUser update(AppUser appuser) {
+    	return userRepository.save(appuser);
+    }
 }
