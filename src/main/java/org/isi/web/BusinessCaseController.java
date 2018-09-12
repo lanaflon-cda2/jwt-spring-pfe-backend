@@ -11,6 +11,8 @@ import org.isi.service.BusinessCaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,6 +38,23 @@ public class BusinessCaseController {
 		businessCase.setCreateddate(new Date());
 		BusinessCase dbusinessCase = businessCaseService.create(businessCase);
 
+	/*
+		//send e-mail
+		 final JavaMailSender  javaMailSender=null ;
+		
+		SimpleMailMessage mail = new SimpleMailMessage();
+		mail.setTo("etudiant.elkefi.marouen@uvt.tn");
+		mail.setFrom("marouen.elkefi1981@gmail.com");
+		mail.setSubject("HELLO WORLD");
+		mail.setText("bussiness case is already OPEND");
+		
+		
+		javaMailSender.send(mail);*/
+		
+		
+		
+		
+		
 		return new ResponseEntity<BusinessCase>(dbusinessCase  ,HttpStatus.OK) ;
 	}
 	
