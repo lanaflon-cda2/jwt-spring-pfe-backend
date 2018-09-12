@@ -50,8 +50,14 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests().antMatchers(HttpMethod.GET,"/user/**").permitAll();
 		 http.authorizeRequests().antMatchers(HttpMethod.PUT,"/vlan/**").permitAll();
 		 http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/vlan/**").hasAnyAuthority("ADMIN");
-
+		 http.authorizeRequests().antMatchers(HttpMethod.POST,"/businesscase/**").permitAll();
+		 http.authorizeRequests().antMatchers(HttpMethod.GET,"/businesscase/**").permitAll();
+		 http.authorizeRequests().antMatchers(HttpMethod.POST,"/updatebuisnesscase/**").permitAll();
+		 http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/delete/**").permitAll();
+		 http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/deleteall/**").permitAll();
 		 http.authorizeRequests().anyRequest().authenticated();
+		 
+		 
 		 http.addFilter(new JWTAuthenticationFilter(authenticationManager()));
 		 http.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
 		 
