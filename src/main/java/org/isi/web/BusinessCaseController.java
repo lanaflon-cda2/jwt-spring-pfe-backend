@@ -8,9 +8,13 @@ import javax.validation.Valid;
 import org.isi.entities.BusinessCase;
 import org.isi.entities.Vlan;
 import org.isi.service.BusinessCaseService;
+import org.isi.service.NotificationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,6 +27,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController 
 public class BusinessCaseController {
+	private Logger logger = LoggerFactory.getLogger(BusinessCaseController.class);
+	
+	@Autowired 
+	private NotificationService notificationService;
+	
 	
 	@Autowired 
 	BusinessCaseService businessCaseService ;
@@ -38,20 +47,13 @@ public class BusinessCaseController {
 		businessCase.setCreateddate(new Date());
 		BusinessCase dbusinessCase = businessCaseService.create(businessCase);
 
-	/*
-		//send e-mail
-		 final JavaMailSender  javaMailSender=null ;
-		
-		SimpleMailMessage mail = new SimpleMailMessage();
-		mail.setTo("etudiant.elkefi.marouen@uvt.tn");
-		mail.setFrom("marouen.elkefi1981@gmail.com");
-		mail.setSubject("HELLO WORLD");
-		mail.setText("bussiness case is already OPEND");
-		
-		
-		javaMailSender.send(mail);*/
-		
-		
+	
+		try {
+			notificationService.sendNotification(dbusinessCase);
+		}catch (MailException e) {
+			
+		logger.info("error message"+e.getMessage());	
+		}
 		
 		
 		
@@ -101,6 +103,7 @@ public class BusinessCaseController {
 	public void delete(@PathVariable(value="id")int id  ) {
 		
 		businessCaseService.delete(id);
+		
 	 
 	
 	}
