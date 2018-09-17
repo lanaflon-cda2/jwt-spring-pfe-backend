@@ -49,9 +49,10 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter{
 		 http.authorizeRequests().antMatchers(HttpMethod.GET,"/vlan/**").permitAll();
 		 http.authorizeRequests().antMatchers(HttpMethod.GET,"/user/**").permitAll();
 		 http.authorizeRequests().antMatchers(HttpMethod.PUT,"/vlan/**").permitAll();
-		 http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/vlan/**").hasAnyAuthority("ADMIN");
+		 http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/vlan/**").permitAll();
 		 http.authorizeRequests().antMatchers(HttpMethod.POST,"/businesscase/**").permitAll();
 		 http.authorizeRequests().antMatchers(HttpMethod.GET,"/businesscase/**").permitAll();
+		 http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/businesscase/**").permitAll();
 		 http.authorizeRequests().antMatchers(HttpMethod.POST,"/updatebuisnesscase/**").permitAll();
 		 http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/delete/**").permitAll();
 		 http.authorizeRequests().antMatchers(HttpMethod.DELETE,"/deleteall/**").permitAll();

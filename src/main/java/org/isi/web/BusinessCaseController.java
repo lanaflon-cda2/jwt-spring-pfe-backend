@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.isi.dao.BusinessCaseRepository;
 import org.isi.entities.BusinessCase;
 import org.isi.entities.Vlan;
 import org.isi.service.BusinessCaseService;
@@ -35,6 +36,10 @@ public class BusinessCaseController {
 	
 	@Autowired 
 	BusinessCaseService businessCaseService ;
+	
+	@Autowired
+	BusinessCaseRepository repository ;
+	
 	
 
 //creation de Business Case 
@@ -92,6 +97,14 @@ public class BusinessCaseController {
 		
 		businessCase.setUpdateddate(new Date());
 		BusinessCase dbusinessCase = businessCaseService.update(businessCase);
+
+		try {
+			notificationService.sendNotificationUpdate(dbusinessCase);
+		}catch (MailException e) {
+			
+		logger.info("error message"+e.getMessage());	
+		}
+		
 		
 		return new ResponseEntity <BusinessCase> (dbusinessCase ,HttpStatus.OK);
 		
@@ -101,6 +114,20 @@ public class BusinessCaseController {
 	
 	@DeleteMapping("/delete/{id}")
 	public void delete(@PathVariable(value="id")int id  ) {
+		
+		
+		BusinessCase dbusinessCase = repository.findByCasenumber(id);
+		
+
+		try {
+			notificationService.sendNotificationDelete(dbusinessCase);
+		}catch (MailException e) {
+			
+		logger.info("error message"+e.getMessage());	
+		}
+		
+		
+		
 		
 		businessCaseService.delete(id);
 		
