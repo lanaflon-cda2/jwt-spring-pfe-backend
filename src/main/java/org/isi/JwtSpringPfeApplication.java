@@ -2,6 +2,7 @@ package org.isi;
 
 import java.util.stream.Stream;
 
+import org.isi.entities.FileStorageProperties;
 import org.isi.dao.TaskRepository;
 import org.isi.dao.VlanRepository;
 import org.isi.entities.AppRole;
@@ -18,7 +19,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 @SpringBootApplication
+@EnableConfigurationProperties({
+    FileStorageProperties.class
+})
 
 public class JwtSpringPfeApplication implements CommandLineRunner {
 @Autowired
