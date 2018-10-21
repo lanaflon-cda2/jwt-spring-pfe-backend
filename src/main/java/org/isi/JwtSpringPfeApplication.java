@@ -3,12 +3,12 @@ package org.isi;
 import java.util.stream.Stream;
 
 import org.isi.entities.FileStorageProperties;
-import org.isi.dao.TaskRepository;
+/*import org.isi.dao.TaskRepository;*/
 import org.isi.dao.VlanRepository;
 import org.isi.entities.AppRole;
 import org.isi.entities.AppUser;
 import org.isi.entities.BusinessCase;
-import org.isi.entities.Task;
+//import org.isi.entities.Task;
 import org.isi.entities.Vlan;
 import org.isi.service.AccountService;
 import org.isi.service.BusinessCaseService;
@@ -30,9 +30,9 @@ public class JwtSpringPfeApplication implements CommandLineRunner {
 	
 	private BusinessCaseService  businessCaseService ;
 	
-	@Autowired
+	/*@Autowired
 	
-	private TaskRepository taskRepository ;
+	private TaskRepository taskRepository ;*/
 	@Autowired
 	private  VlanRepository repository;
 	@Autowired
@@ -68,14 +68,14 @@ public class JwtSpringPfeApplication implements CommandLineRunner {
 		accountService.addRoleToUser("it", "IT");*/
 		
 		
-	Stream.of("T1","T2","T3","T3").forEach(t->{
+	/*Stream.of("T1","T2","T3","T3").forEach(t->{
 		taskRepository.save( new Task(null,t));
 		
 	});
 	taskRepository.findAll().forEach(t->{
 		System.out.println(t.getTaskName());
 	});
-	
+	*/
 	
 		
 		
