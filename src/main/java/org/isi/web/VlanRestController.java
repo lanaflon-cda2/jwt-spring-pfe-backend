@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.isi.entities.Task;
+
 import org.isi.entities.Vlan;
 import org.isi.service.VlanService;
 import org.springframework.beans.factory.annotation.Autowired;
